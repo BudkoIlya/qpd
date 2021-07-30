@@ -1,33 +1,53 @@
 function Calculate(value) {
-  const plus = [value];
+  const signs = ["+"];
+  const ininialValues = [value];
   const methods = {
     plus: (val) => {
-      plus.push(val);
+      ininialValues.push(val);
+      signs.push("+");
       return methods;
     },
     minus: (val) => {
-      plus.push(-val);
+      signs.push("-");
+      ininialValues.push(val);
       return methods;
     },
     multiply: (val) => {
-      const lastElement = plus[plus.length - 1];
-      plus.pop();
-      plus.push(lastElement * val);
-    //   console.log("newPlusArr1", plus);
+      signs.push("*");
+      ininialValues.push(val);
       return methods;
     },
     divide: (val) => {
-      const lastElement = plus[plus.length - 1];
-      plus.pop();
-      plus.push(lastElement / val);
-    //   console.log("newPlusArr2", plus);
+      signs.push("/");
+      ininialValues.push(val);
       return methods;
     },
     calculate: () => {
-    //   console.log("newPlusArr", plus);
+      const result = [];
+      ininialValues.forEach((el, i) => {
+        switch (signs[i]) {
+          case "+":
+            result.push(el);
+            break;
+          case "-":
+            result.push(-el);
+            break;
+          case "*": {
+            const lastElement = result[result.length - 1];
+            result.pop();
+            result.push(lastElement * el);
+            break;
+          }
+          case "/": {
+            const lastElement = result[result.length - 1];
+            result.pop();
+            result.push(lastElement / el);
+            break;
+          }
+        }
+      });
       const reducer = (accumulator, currentValue) => accumulator + currentValue;
-      const result = plus.reduce(reducer, 0);
-      return result;
+      return result.reduce(reducer, 0);
     },
   };
   if (new.target === undefined) {
