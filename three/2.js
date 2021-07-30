@@ -1,12 +1,7 @@
 function createClass({ constructor, ...props }) {
     return function (name) {
-      //----obj
       constructor.call(this, name);
-      Object.keys(props).map((key) => {this.key = props[key]});
-      // return {
-      //   name: this.name,
-      //   ...props,
-      // };
+      Object.keys(props).forEach((key) => {this[key] = props[key]});
     };
   }
   
