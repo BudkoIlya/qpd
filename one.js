@@ -52,7 +52,6 @@ const isEqualObjects = (obj1, obj2) => {
   for (const key of keys1) {
     const val1 = obj1[key];
     const val2 = obj2[key];
-    console.log(val1);
     const areObjects = isObject(val1) && isObject(val2);
     console.log(areObjects);
     if (
